@@ -1,0 +1,26 @@
+body {
+    background-color: antiquewhite;
+}
+
+#sect1 {
+    height: 100vh;
+}
+
+#sect2,
+#sect3 {
+    height: 50vh;
+}
+
+#sect2 {
+    background-image: url('https://picsum.photos/400');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+section {
+    border: solid 1px salmon;
+    border-radius: 8px;
+    margin: 1%;
+    padding: 4%;
+}
+

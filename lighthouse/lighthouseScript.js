@@ -6,11 +6,11 @@ const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
 
 const urls = [
-  "https://www.ashleybregmanlcsw.com/"
-  // "file:///Users/jr3567/lumenBanner/about.html",
-  // "file:///Users/jr3567/lumenBanner/municipal.html",
-  // "file:///Users/jr3567/lumenBanner/commercial.html",
-  // "file:///Users/jr3567/lumenBanner/options.html"
+//"http://lumenbanner.com/about.html",
+  //"http://lumenbanner.com"
+  //"http://lumenbanner.com/municipal.html"
+  //"http://lumenbanner.com/commercial.html"
+  //"http://lumenbanner.com/options.html"
 ];
 
 const wait = function (val) {
