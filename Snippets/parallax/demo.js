@@ -1,21 +1,21 @@
-//Replicate Parallax effect
-//To Do: Make image size larger than the size of the containing box. 
+//Poor Man's Parallax effect
 
-const numSteps = 100.0;
+const numSteps = 500.0;
 let target;
-let paralaxEffect;
+let eff;
+let parallaxEffect;
 let prevRatio = 0.0;
 let incXPos = "bottom ratio right 50%";
 let decXPos = "bottom ratio right 50%";
 
 function handleIntersect(entries, observer) {
   entries.forEach((entry) => {
+    eff = Math.floor(Math.abs(parseInt(parallaxEffect) - (100*entry.intersectionRatio)));
     if (entry.intersectionRatio > prevRatio) {
-        entry.target.style.backgroundPosition = incXPos.replace("ratio", `${Math.floor(paralaxEffect*entry.intersectionRatio)}px`);
+        entry.target.style.backgroundPosition = incXPos.replace("ratio", `${eff}px`);
       } else {
-        entry.target.style.backgroundPosition = decXPos.replace("ratio", `${Math.floor(paralaxEffect*entry.intersectionRatio)}px`);
-      }
-  
+        entry.target.style.backgroundPosition = decXPos.replace("ratio", `${eff}px`);
+      } 
       prevRatio = entry.intersectionRatio;
   });
 }
@@ -34,7 +34,6 @@ function buildThresholdList() {
 
 function createObserver() {
   let observer;
-
   let options = {
     root: null,
     rootMargin: "0px",
@@ -49,9 +48,9 @@ function createObserver() {
 window.addEventListener(
     "load",
     (event) => {
-      target = document.querySelector("#sect2");
+      target = document.querySelector("#sect1");
       target.style.backgroundPosition = "bottom 50% right 50%";
-      paralaxEffect = target.getAttribute('data-xAmt');
+      parallaxEffect = target.getAttribute('data-xAmt');
       createObserver();
     },
     false

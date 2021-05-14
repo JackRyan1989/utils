@@ -1,0 +1,19 @@
+body {
+    background-color: whitesmoke;
+    height: 500vh;
+}
+
+#title {
+    font-size: 3rem;
+    color: white;
+}
+
+#sect1 {
+    height: 100vh;
+    overflow: hidden;
+    background: url('../../../placeholder.webp');
+    border: solid 1px black;
+    background-repeat: no-repeat;
+    display: grid;
+    place-items: center;
+}

@@ -27,7 +27,7 @@ window.onload = function () {
   }
 
   //Grab the button element:
-  var nel = document.getElementById("focus-next-el");
+  var nel = document.querySelector("#focus-next-el");
 
   //Tell it what to do to the page when it's clicked:
   nel.addEventListener("click", (event) => {
