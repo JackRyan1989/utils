@@ -1,0 +1,19 @@
+body {
+    background-color: bisque;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    height: 300vh;
+    justify-content: space-between;
+}
+
+img {
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 2%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    height: 400px;
+}

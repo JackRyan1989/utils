@@ -29,20 +29,21 @@ $(document).ready(function () {
   $(".type-item").each(function () {
     var correctedText = $(this)
       .text()
-      .replace(/tenure-track/g, "Tenure Track")
+      .replace(/faculty/g, "Faculty")
       .replace(/teaching/g, "Teaching")
       .replace(/emeriti/g, "Emeriti")
-      .replace(/visiting/g, "Visiting");
+      .replace(/visiting/g, "Visiting")
+      .replace(/affiliated/g, "Affiliated");
     $(this).text(correctedText);
   });
 
-  $(".accept-item").each(function () {
-    var correctedText = $(this)
-      .text()
-      .replace(/true/g, "Accepting Students")
-      .replace(/false/g, "");
-    $(this).text(correctedText);
-  });
+  // $(".accept-item").each(function () {
+  //   var correctedText = $(this)
+  //     .text()
+  //     .replace(/true/g, "Accepting Students")
+  //     .replace(/false/g, "");
+  //   $(this).text(correctedText);
+  // });
 
   // Add float left styling to search bar:
   $(".form-control.input-sm").css("float", "left");
@@ -74,10 +75,10 @@ $("select.filterBy").change(function () {
       if (
         filters[0] !== " " &&
         filters[1] === " " &&
-        filters[2] === " " &&
+        // filters[2] === " " &&
         $(this).hasClass(filters[0]) &&
-        !$(this).hasClass(filters[1]) &&
-        !$(this).hasClass(filters[2])
+        !$(this).hasClass(filters[1]) 
+        //&& !$(this).hasClass(filters[2])
       ) {
         items.push($(this));
       }
@@ -85,67 +86,74 @@ $("select.filterBy").change(function () {
       else if (
         filters[0] !== " " &&
         filters[1] !== " " &&
-        filters[2] == " " &&
+        //filters[2] == " " &&
         $(this).hasClass(filters[0]) &&
-        $(this).hasClass(filters[1]) &&
-        !$(this).hasClass(filters[2])
+        $(this).hasClass(filters[1]) 
+        //&& !$(this).hasClass(filters[2])
       ) {
         items.push($(this));
       }
       //Department Type and Acceptance:
-      else if (
-        filters[0] !== " " &&
-        filters[1] !== " " &&
-        filters[2] !== " " &&
-        $(this).hasClass(filters[0]) &&
-        $(this).hasClass(filters[1]) &&
-        $(this).hasClass(filters[2])
-      ) {
-        items.push($(this));
-      }
-      //Department and Acceptance:
-      else if (
-        filters[0] !== " " &&
-        filters[1] == " " &&
-        filters[2] !== " " &&
-        $(this).hasClass(filters[0]) &&
-        !$(this).hasClass(filters[1]) &&
-        $(this).hasClass(filters[2])
-      ) {
-        items.push($(this));
-      }
+      // else if (
+      //   filters[0] !== " " &&
+      //   filters[1] !== " " &&
+      //   filters[2] !== " " &&
+      //   $(this).hasClass(filters[0]) &&
+      //   $(this).hasClass(filters[1]) &&
+      //   $(this).hasClass(filters[2])
+      // ) {
+      //   items.push($(this));
+      // }
+      // //Department and Acceptance:
+      // else if (
+      //   filters[0] !== " " &&
+      //   filters[1] == " " &&
+      //   filters[2] !== " " &&
+      //   $(this).hasClass(filters[0]) &&
+      //   !$(this).hasClass(filters[1]) &&
+      //   $(this).hasClass(filters[2])
+      // ) {
+      //   items.push($(this));
+      // }
       //Type Only:
       else if (
         filters[0] == " " &&
         filters[1] !== " " &&
-        filters[2] == " " &&
+        //filters[2] == " " &&
         $(this).hasClass(filters[1]) &&
-        !$(this).hasClass(filters[0]) &&
-        !$(this).hasClass(filters[2])
+        !$(this).hasClass(filters[0]) 
+        //&& !$(this).hasClass(filters[2])
       ) {
         items.push($(this));
       }
       //Type and Acceptance:
+      // else if (
+      //   filters[0] == " " &&
+      //   filters[1] !== " " &&
+      //   filters[2] !== " " &&
+      //   $(this).hasClass(filters[1]) &&
+      //   $(this).hasClass(filters[2]) &&
+      //   !$(this).hasClass(filters[0])
+      // ) {
+      //   items.push($(this));
+      // }
+      // //Acceptance Only:
+      // else if (
+      //   filters[0] == " " &&
+      //   filters[1] == " " &&
+      //   filters[2] !== " " &&
+      //   $(this).hasClass(filters[2]) &&
+      //   !$(this).hasClass(filters[0]) &&
+      //   !$(this).hasClass(filters[1])
+      // ) {
+      //   items.push($(this));
+      // }
+      //Display all:
       else if (
         filters[0] == " " &&
-        filters[1] !== " " &&
-        filters[2] !== " " &&
-        $(this).hasClass(filters[1]) &&
-        $(this).hasClass(filters[2]) &&
-        !$(this).hasClass(filters[0])
+        filters[1] == " "
       ) {
-        items.push($(this));
-      }
-      //Acceptance Only:
-      else if (
-        filters[0] == " " &&
-        filters[1] == " " &&
-        filters[2] !== " " &&
-        $(this).hasClass(filters[2]) &&
-        !$(this).hasClass(filters[0]) &&
-        !$(this).hasClass(filters[1])
-      ) {
-        items.push($(this));
+        $("#example tbody").find("tr.FacultyTableRow").show();
       }
       return items;
     });

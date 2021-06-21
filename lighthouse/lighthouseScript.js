@@ -7,10 +7,10 @@ const chromeLauncher = require("chrome-launcher");
 
 const urls = [
 //"http://lumenbanner.com/about.html",
-  //"http://lumenbanner.com"
+//  "http://lumenbanner.com"
   //"http://lumenbanner.com/municipal.html"
   //"http://lumenbanner.com/commercial.html"
-  //"http://lumenbanner.com/options.html"
+  "http://lumenbanner.com/options.html"
 ];
 
 const wait = function (val) {
