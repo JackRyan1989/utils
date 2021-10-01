@@ -6,11 +6,7 @@ const lighthouse = require("lighthouse");
 const chromeLauncher = require("chrome-launcher");
 
 const urls = [
-//"http://lumenbanner.com/about.html",
-//  "http://lumenbanner.com"
-  //"http://lumenbanner.com/municipal.html"
-  //"http://lumenbanner.com/commercial.html"
-  "http://lumenbanner.com/options.html"
+"https://www.drexel.edu"
 ];
 
 const wait = function (val) {

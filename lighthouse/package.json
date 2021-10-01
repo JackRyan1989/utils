@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "inquirer": "^3.3.0",
     "lighthouse": "^6.3.0"
   }
 }
