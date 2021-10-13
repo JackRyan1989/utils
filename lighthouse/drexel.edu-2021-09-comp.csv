@@ -1,0 +1,11 @@
+Metrics:, drexel.edu-2021-09-, drexel.edu-2021-09-17T16:10
+firstContentfulPaint:, 6753,6888
+firstMeaningfulPaint:, 6929,7108
+largestContentfulPaint:, 7230,7277
+firstCPUIdle:, 9603,9543
+interactive:, 10310,10263
+speedIndex:, 9157,8474
+estimatedInputLatency:, 65,36
+totalBlockingTime:, 327,236
+maxPotentialFID:, 472,387
+cumulativeLayoutShift:, 0.044834267285409915,0.03816066164667425

@@ -1,14 +1,6 @@
 // Simple a b testing for lighthouse metrics to compare website performance across versions.
 
-// Load relevant json files
-// Parse json
-// Create object for test A
-// Create object for test B
-// Get json fields
-// Put relevant fields in test A and test B objects
-// Calculate differences between A and B
-
-const { fs, readdirSync, statSync } = require("fs");
+const { readdirSync, readFileSync, writeFile } = require("fs");
 const path = require("path");
 const inquirer = require("inquirer");
 
@@ -41,6 +33,11 @@ const directories = [
 
 // Somewhere to put the files we want:
 let filesArr = [];
+let dirPath = "";
+// And output from those files:
+let obj1 = null;
+let obj2 = null;
+let finalObj = {};
 
 const reindAndPush = function (sel, files) {
   let ind = [...files].indexOf(sel.file);
@@ -48,10 +45,62 @@ const reindAndPush = function (sel, files) {
   filesArr.push(sel.file);
 };
 
+const dataFromArray = function (arr) {
+  for (const file of arr) {
+      try {
+        let filePath = path.join(dirPath, file);
+        const data = readFileSync(filePath, 'utf8');
+        const dataJSON = JSON.parse(data);
+          if (obj1 === null) {
+              obj1 = dataJSON.audits.metrics.details.items[0]; 
+          } else {
+              obj2 = dataJSON.audits.metrics.details.items[0];
+          }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+}
+
+const mutateObjs = function(objOne, objTwo) {
+  for (const [key, val] of Object.entries(objOne)) {
+    if (key === "observedTimeOrigin") {
+      break
+    }
+    finalObj[key] = [];
+    finalObj[key].push(val);
+  }
+  for (const [key, val] of Object.entries(objTwo)) {
+    if (key === "observedTimeOrigin") {
+      break
+    }
+    finalObj[key].push(val);
+  }
+}
+
+// Write the output to file:
+const writeOut = function(data) {
+  const filename = filesArr[0].slice(0, -5).concat("comp.csv");
+  writeFile(filename, extractAsCSV(data), err => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(`Success! Saved as ${filename}.`);
+    }
+  })
+}
+
+const extractAsCSV = function (data) {
+  const header = [`Metrics:, ${filesArr[0].slice(0, -5)}, ${filesArr[1].slice(0, -5)}`];
+  const rows = Object.entries(data).map(datum => `${datum[0]}:, ${datum[1]}`);
+  return header.concat(rows).join('\n');
+}
+
 // Run the command line questions
 inquirer
   .prompt(directories)
   .then(function (selection) {
+    dirPath = path.join(__dirname, selection.directory);
     let files = getFiles(selection.directory);
     const fileList = [
       {
@@ -69,13 +118,12 @@ inquirer
           .prompt(fileList)
           .then(function (selected) {
             reindAndPush(selected, files);
+            dataFromArray(filesArr);
+            mutateObjs(obj1, obj2);
+            writeOut(finalObj);
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   })
   .catch((err) => console.error(err));
-
-  // Ok so now the files we want are in the filesArr array. What do we do now? 
-  // They're JSON, so we can parse them and treat them like objects. We can grab the values from the keys we are interested in.
-  // Next step: Parse the json, and see what we have.
