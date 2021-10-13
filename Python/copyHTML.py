@@ -1,4 +1,4 @@
-import urllib.request, ssl, subprocess, argparse, re, sys
+import urllib.request, ssl, argparse, sys
 from bs4 import BeautifulSoup
 
 #Initialize argparser:

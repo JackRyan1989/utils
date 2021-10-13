@@ -1,6 +1,5 @@
 import urllib.request
 import re
-import csv
 
 url = 'https://drexel.edu/undergrad/life-at-drexel/student-stories/'
 
