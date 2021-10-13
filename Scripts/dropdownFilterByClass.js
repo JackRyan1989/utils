@@ -47,6 +47,8 @@ $(document).ready(function () {
 
   // Add float left styling to search bar:
   $(".form-control.input-sm").css("float", "left");
+  //Hide the no results text
+  $("#noRes").hide();
 });
 
 //One function to filter them all:
@@ -158,9 +160,25 @@ $("select.filterBy").change(function () {
       return items;
     });
   //Loop through the list of rows and display them
-  for (var i = 0; i < items.length; i++) {
-    items[i].show();
-  }
+  if (items.length > 0) {
+    //Hide the no results text
+    $("#noRes").hide();
+    for (var i = 0; i < items.length; i++) {
+        items[i].removeClass(classes);
+    }
+    for (var i = 0; i < items.length; i++) {
+      if ((i === 0) || (i%2 === 0)) {
+        items[i].addClass('odd');
+      } else { 
+        items[i].addClass('even')
+      }
+      items[i].show();
+    }
+  } else {
+    //Show the no results text
+    $("#noRes").show();
+  };
+
 });
 
 //Reset button - on click set the select options to None:
@@ -168,4 +186,6 @@ $("#reset").click(function (event) {
   $(event).preventDefault;
   $("#example tbody").find("tr.FacultyTableRow").show();
   $("select").val("None");
+  //Hide the no results text
+  $("#noRes").hide();
 });
